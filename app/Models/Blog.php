@@ -7,6 +7,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * Class Blog
+ * @property int $user_id
+ * @property string $slug
+ * @property string $title
+ * @property string $content
+ * @property string $image
+ * @property  array $tags
+ *
+ * @package App\Models
+ */
 class Blog extends Model
 {
     use HasFactory;
@@ -24,7 +35,7 @@ class Blog extends Model
     ];
 
     protected $casts = [
-      'tags' => 'array',
+        'tags' => 'array',
     ];
 
     public function comments(): HasMany
