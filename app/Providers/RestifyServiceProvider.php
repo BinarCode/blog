@@ -4,42 +4,46 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\Gate;
 use Binaryk\LaravelRestify\RestifyApplicationServiceProvider;
+use App\Http\Controllers\Restify\Auth\RegisterController;
+use App\Http\Controllers\Restify\Auth\ForgotPasswordController;
+use App\Http\Controllers\Restify\Auth\LoginController;
+use App\Http\Controllers\Restify\Auth\ResetPasswordController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Restify\Auth\VerifyController;
 
 class RestifyServiceProvider extends RestifyApplicationServiceProvider
 {
-    /**
-     * Bootstrap any application services.
-     *
-     * @return void
-     */
     public function boot()
     {
         parent::boot();
     }
 
-    /**
-     * Register the Restify gate.
-     *
-     * This gate determines who can access Restify in non-local environments.
-     *
-     * @return void
-     */
     protected function gate(): void
     {
         Gate::define('viewRestify', function ($user) {
-            return in_array($user->email, [
-                //
-            ]);
+            return true;
         });
     }
 
-    /**
-     * Register any application services.
-     *
-     * @return void
-     */
     public function register()
     {
-        //
+        Route::post('register', RegisterController::class)
+            ->name('restify.register');
+
+        Route::post('login', LoginController::class)
+            ->middleware('throttle:6,1')
+            ->name('restify.login');
+
+        Route::post('verify/{id}/{hash}', VerifyController::class)
+            ->middleware('throttle:6,1')
+            ->name('restify.verify');
+
+        Route::post('forgotPassword', ForgotPasswordController::class)
+            ->middleware('throttle:6,1')
+            ->name('restify.forgotPassword');
+
+        Route::post('resetPassword', ResetPasswordController::class)
+            ->middleware('throttle:6,1')
+            ->name('restify.resetPassword');
     }
 }
