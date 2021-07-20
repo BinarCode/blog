@@ -4,6 +4,7 @@ namespace App\Restify;
 
 use App\Models\User;
 use Binaryk\LaravelRestify\Fields\Field;
+use Binaryk\LaravelRestify\Fields\HasMany;
 use Binaryk\LaravelRestify\Fields\Image;
 use Binaryk\LaravelRestify\Http\Requests\RestifyRequest;
 use Illuminate\Http\Request;
@@ -12,6 +13,13 @@ use Illuminate\Support\Facades\Hash;
 class UserRepository extends Repository
 {
     public static $model = User::class;
+
+    public static function related(): array
+    {
+        return [
+            'blogs' => HasMany::make('blogs', BlogRepository::class),
+        ];
+    }
 
     public function fields(RestifyRequest $request): array
     {
