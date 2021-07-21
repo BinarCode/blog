@@ -9,7 +9,7 @@ use Illuminate\Http\JsonResponse;
 
 class AddViewOnBlogAction extends Action
 {
-    public static $uriKey = 'add-view-blog';
+    public static $uriKey = 'add-views-blog';
 
     public function handle(ActionRequest $request, Blog $blog): JsonResponse
     {
