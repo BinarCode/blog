@@ -11,24 +11,10 @@ class ForgotPasswordMail extends Mailable
     use Queueable;
     use SerializesModels;
 
-    /**
-     * Create a new message instance.
-     *
-     * @return void
-     */
-
-    private string $url;
-
-    public function __construct($url)
+    public function __construct(private string $url)
     {
-        $this->url = $url;
     }
 
-    /**
-     * Build the message.
-     *
-     * @return $this
-     */
     public function build()
     {
         return $this->markdown('restify.auth.reset-password')->with([

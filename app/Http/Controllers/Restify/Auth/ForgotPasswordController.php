@@ -32,7 +32,7 @@ class ForgotPasswordController extends Controller
         Mail::to($user->email)->send(
             new ForgotPasswordMail($url)
         );
-        dd('here');
+
         return data(__('Email sent.'));
     }
 }
