@@ -26,7 +26,6 @@ class CommentRepository extends Repository
     public function fields(RestifyRequest $request): array
     {
         return [
-            field('user_id')->storingRules('required'),
             field('blog_id')->storingRules('required'),
             field('body')->storingRules('required'),
         ];

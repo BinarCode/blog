@@ -33,6 +33,6 @@ class CommentPolicy
 
     public function delete(Authenticatable $user, Comment $model)
     {
-        return false;
+        return $model->user_id === $user->id;
     }
 }

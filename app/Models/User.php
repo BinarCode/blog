@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 /**
  * Class User
@@ -16,13 +18,15 @@ use Laravel\Sanctum\HasApiTokens;
  * @property string $last_name
  * @property string $avatar
  * @property string $email
+ * @property int $id
  * @package App\Models
  */
-class User extends Authenticatable implements Sanctumable, CanResetPassword
+class User extends Authenticatable implements Sanctumable, CanResetPassword, HasMedia
 {
     use HasFactory;
     use Notifiable;
     use HasApiTokens;
+    use InteractsWithMedia;
 
     protected $fillable = [
         'first_name',
