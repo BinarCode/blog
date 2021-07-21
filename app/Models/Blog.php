@@ -6,6 +6,8 @@ use App\Models\Concerns\WithCreator;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 
 /**
  * Class Blog
@@ -22,6 +24,8 @@ class Blog extends Model
 {
     use HasFactory;
     use WithCreator;
+    use HasSlug;
+
 
     protected $table = 'blogs';
 
@@ -32,6 +36,7 @@ class Blog extends Model
         'image',
         'tags',
         'slug',
+        'views',
     ];
 
     protected $casts = [
@@ -40,6 +45,22 @@ class Blog extends Model
 
     public function comments(): HasMany
     {
-        return $this->hasMany(Comment::class, 'id', 'blog_id');
+        return $this->hasMany(Comment::class, 'blog_id', 'id');
+    }
+
+    public function getSlugOptions(): SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom('title')
+            ->saveSlugsTo('slug');
+    }
+
+    public function addViews(): self
+    {
+        $this->views++;
+        $this->timestamps = false;
+        $this->save();
+
+        return $this;
     }
 }

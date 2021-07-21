@@ -3,6 +3,7 @@
 namespace App\Restify;
 
 use App\Models\Blog;
+use App\Restify\Actions\AddViewOnBlogAction;
 use Binaryk\LaravelRestify\Fields\BelongsTo;
 use Binaryk\LaravelRestify\Fields\HasMany;
 use Binaryk\LaravelRestify\Fields\Image;
@@ -18,7 +19,7 @@ class BlogRepository extends Repository
     ];
 
     public static array $sort = [
-        'title',
+        'views',
     ];
 
     public static function related(): array
@@ -37,6 +38,14 @@ class BlogRepository extends Repository
             field('tags'),
             Image::make('image'),
             field('slug')->readonly(),
+            field('views')->readonly(),
+        ];
+    }
+
+    public function actions(RestifyRequest $request): array
+    {
+        return [
+          AddViewOnBlogAction::make()->onlyOnShow(),
         ];
     }
 }

@@ -33,6 +33,6 @@ class BlogPolicy
 
     public function delete(Authenticatable $user, Blog $model)
     {
-        return false;
+        return $model->user_id === $user->id;
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlogImageUploaderController;
 use App\Http\Controllers\Restify\Auth\ForgotPasswordController;
 use App\Http\Controllers\Restify\Auth\LoginController;
 use App\Http\Controllers\Restify\Auth\RegisterController;
@@ -32,3 +33,5 @@ Route::post('forgotPassword', ForgotPasswordController::class)
 Route::post('resetPassword', ResetPasswordController::class)
     ->middleware('throttle:6,1')
     ->name('restify.resetPassword');
+
+Route::post('blog/image', BlogImageUploaderController::class)->name('blog.image');

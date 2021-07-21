@@ -3,12 +3,9 @@
 namespace App\Restify;
 
 use App\Models\User;
-use Binaryk\LaravelRestify\Fields\Field;
 use Binaryk\LaravelRestify\Fields\HasMany;
 use Binaryk\LaravelRestify\Fields\Image;
 use Binaryk\LaravelRestify\Http\Requests\RestifyRequest;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 
 class UserRepository extends Repository
 {
@@ -18,6 +15,7 @@ class UserRepository extends Repository
     {
         return [
             'blogs' => HasMany::make('blogs', BlogRepository::class),
+            'comments' => HasMany::make('comments', CommentRepository::class),
         ];
     }
 
@@ -30,12 +28,6 @@ class UserRepository extends Repository
             Image::make('avatar'),
 
             field('email')->storingRules('required', 'unique:users'),
-
-            field::make('password')
-                ->value(fn (Request $request) => Hash::make($request->input('password')))
-                ->storingRules('required')
-                ->storingRules('confirmed')
-                ->hidden(),
         ];
     }
 }
