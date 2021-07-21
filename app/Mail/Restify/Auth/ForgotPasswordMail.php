@@ -16,9 +16,12 @@ class ForgotPasswordMail extends Mailable
      *
      * @return void
      */
-    public function __construct(private string $url)
+
+    private string $url;
+
+    public function __construct($url)
     {
-        //
+        $this->url = $url;
     }
 
     /**
@@ -28,7 +31,7 @@ class ForgotPasswordMail extends Mailable
      */
     public function build()
     {
-        return $this->view('views.restify.auth.reset-password')->with([
+        return $this->markdown('restify.auth.reset-password')->with([
             'url' => $this->url,
         ]);
     }

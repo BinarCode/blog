@@ -3,6 +3,7 @@
 namespace App\Restify;
 
 use App\Models\User;
+use App\Restify\Actions\ChangePasswordAction;
 use Binaryk\LaravelRestify\Fields\HasMany;
 use Binaryk\LaravelRestify\Fields\Image;
 use Binaryk\LaravelRestify\Http\Requests\RestifyRequest;
@@ -28,6 +29,13 @@ class UserRepository extends Repository
             Image::make('avatar'),
 
             field('email')->storingRules('required', 'unique:users'),
+        ];
+    }
+
+    public function actions(RestifyRequest $request): array
+    {
+        return [
+          ChangePasswordAction::new()->standalone(),
         ];
     }
 }
