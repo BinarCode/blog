@@ -17,6 +17,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
  * @property string $first_name
  * @property string $last_name
  * @property string $avatar
+ * @property string $password
  * @property string $email
  * @property int $id
  * @package App\Models
