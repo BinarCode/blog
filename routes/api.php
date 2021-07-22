@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BlogImageUploaderController;
 use App\Http\Controllers\Restify\Auth\ForgotPasswordController;
 use App\Http\Controllers\Restify\Auth\LoginController;
@@ -35,3 +36,5 @@ Route::post('resetPassword', ResetPasswordController::class)
     ->name('restify.resetPassword');
 
 Route::post('blog/image', BlogImageUploaderController::class)->name('blog.image');
+Route::get('blogs', [BlogController::class,  'getBlogs'])->name('blogs');
+Route::post('blogs/{id}/view', [BlogController::class,  'addViews'])->name('blog.views');
