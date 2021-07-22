@@ -3,7 +3,6 @@
 namespace App\Restify;
 
 use App\Models\Blog;
-use App\Restify\Actions\AddViewOnBlogAction;
 use Binaryk\LaravelRestify\Fields\BelongsTo;
 use Binaryk\LaravelRestify\Fields\HasMany;
 use Binaryk\LaravelRestify\Fields\Image;
@@ -39,13 +38,6 @@ class BlogRepository extends Repository
             Image::make('image'),
             field('slug')->readonly(),
             field('views')->readonly(),
-        ];
-    }
-
-    public function actions(RestifyRequest $request): array
-    {
-        return [
-          AddViewOnBlogAction::make()->onlyOnShow(),
         ];
     }
 }

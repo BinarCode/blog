@@ -4,6 +4,7 @@ namespace App\Restify;
 
 use App\Models\User;
 use App\Restify\Actions\ChangePasswordAction;
+use Binaryk\LaravelRestify\Fields\BelongsToMany;
 use Binaryk\LaravelRestify\Fields\HasMany;
 use Binaryk\LaravelRestify\Fields\Image;
 use Binaryk\LaravelRestify\Http\Requests\RestifyRequest;
@@ -17,6 +18,7 @@ class UserRepository extends Repository
         return [
             'blogs' => HasMany::make('blogs', BlogRepository::class),
             'comments' => HasMany::make('comments', CommentRepository::class),
+            'media' => HasMany::make('media', MediaRepository::class),
         ];
     }
 
