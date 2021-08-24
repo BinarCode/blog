@@ -11,14 +11,12 @@ class ForgotPasswordMail extends Mailable
     use Queueable;
     use SerializesModels;
 
-    public function __construct(private string $url)
+    public function __construct(public string $url)
     {
     }
 
     public function build()
     {
-        return $this->markdown('restify.auth.reset-password')->with([
-            'url' => $this->url,
-        ]);
+        return $this->markdown('reset-password');
     }
 }
