@@ -17,7 +17,6 @@ class BlogController extends Controller
      */
     public function getBlogs(Request $request): JsonResponse
     {
-
         if ($request->has('mostViewed')) {
             $blogsSorted = Blog::query()->orderBy('views', 'DESC')->with('comments')->get();
 
@@ -40,7 +39,7 @@ class BlogController extends Controller
      * @param null $page
      * @return LengthAwarePaginator
      */
-    public function paginate($items, $perPage, $page = null)
+    public function paginate($items, $perPage, $page = null): LengthAwarePaginator
     {
         $perPage = $perPage ?? 15;
         $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
@@ -51,7 +50,7 @@ class BlogController extends Controller
         ]);
     }
 
-    public function addViews(int $id)
+    public function addViews(int $id): JsonResponse
     {
         $blog = Blog::find($id);
 
@@ -62,5 +61,17 @@ class BlogController extends Controller
         $blog->addViews();
 
         return response()->json(['data' => $blog]);
+    }
+
+    public function search(Request $request): JsonResponse
+    {
+        if (! $request->has('search')) {
+            return response()->json(['data' => Blog::all()]);
+        }
+
+        return response()->json(['data' => Blog::query()
+            ->where('title', 'LIKE', '%' . $request->query('search') . '%')
+            ->orWhere('content', 'LIKE', '%' . $request->query('search') . '%')->get()
+        ]);
     }
 }

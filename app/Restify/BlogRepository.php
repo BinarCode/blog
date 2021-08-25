@@ -7,6 +7,8 @@ use Binaryk\LaravelRestify\Fields\BelongsTo;
 use Binaryk\LaravelRestify\Fields\HasMany;
 use Binaryk\LaravelRestify\Fields\Image;
 use Binaryk\LaravelRestify\Http\Requests\RestifyRequest;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\Relation;
 
 class BlogRepository extends Repository
 {
