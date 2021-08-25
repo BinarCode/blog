@@ -10,7 +10,7 @@ use App\Http\Controllers\Restify\Auth\VerifyController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::restifyAuth();
+
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
@@ -38,3 +38,4 @@ Route::post('resetPassword', ResetPasswordController::class)
 Route::post('blog/image', BlogImageUploaderController::class)->name('blog.image');
 Route::get('blogs', [BlogController::class,  'getBlogs'])->name('blogs');
 Route::post('blogs/{id}/view', [BlogController::class,  'addViews'])->name('blog.views');
+Route::get('blogs/advance-search', [BlogController::class, 'search'])->name('blog.search');
