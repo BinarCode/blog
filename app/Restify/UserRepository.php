@@ -4,12 +4,9 @@ namespace App\Restify;
 
 use App\Models\User;
 use App\Restify\Actions\ChangePasswordAction;
-use Binaryk\LaravelRestify\Fields\BelongsToMany;
 use Binaryk\LaravelRestify\Fields\HasMany;
 use Binaryk\LaravelRestify\Fields\Image;
 use Binaryk\LaravelRestify\Http\Requests\RestifyRequest;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Relations\Relation;
 
 class UserRepository extends Repository
 {
