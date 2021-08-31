@@ -36,9 +36,7 @@ class BlogRepository extends Repository
         return [
             field('title')->storingRules('required'),
             field('content'),
-            field('tags', function (){
-                return json_decode($this->tags);
-            }),
+            field('tags'),
             Image::make('image'),
             field('slug')->readonly(),
             field('views')->readonly(),
