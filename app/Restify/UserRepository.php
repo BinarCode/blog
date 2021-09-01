@@ -7,10 +7,11 @@ use App\Restify\Actions\ChangePasswordAction;
 use Binaryk\LaravelRestify\Fields\HasMany;
 use Binaryk\LaravelRestify\Fields\Image;
 use Binaryk\LaravelRestify\Http\Requests\RestifyRequest;
+use Laravolt\Avatar\Facade as Avatar;
 
 class UserRepository extends Repository
 {
-    public static $model = User::class;
+    public static string $model = User::class;
 
     public static function related(): array
     {
@@ -24,10 +25,13 @@ class UserRepository extends Repository
     public function fields(RestifyRequest $request): array
     {
         return [
-            field('first_name'),
-            field('last_name'),
+            field('first_name')->storingRules('required'),
+            field('last_name')->storingRules('required'),
             field('email'),
-            Image::make('avatar'),
+            field('name'),
+            Image::make('avatar')->disk('public')->default(
+                Avatar::create($this->model()->name)->setFontFamily('Poppins')->toBase64(),
+            ),
 
             field('email')->storingRules('required', 'unique:users'),
         ];
