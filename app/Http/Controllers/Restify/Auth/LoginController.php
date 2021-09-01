@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use Illuminate\Support\Facades\Storage;
 
 class LoginController extends Controller
 {
@@ -34,6 +35,6 @@ class LoginController extends Controller
         return data([
             'user' => $user,
             'token' => $token,
-        ]);
+    ]);
     }
 }

@@ -7,6 +7,7 @@ use App\Http\Controllers\Restify\Auth\LoginController;
 use App\Http\Controllers\Restify\Auth\RegisterController;
 use App\Http\Controllers\Restify\Auth\ResetPasswordController;
 use App\Http\Controllers\Restify\Auth\VerifyController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -36,6 +37,7 @@ Route::post('resetPassword', ResetPasswordController::class)
     ->name('restify.resetPassword');
 
 Route::post('blog/image', BlogImageUploaderController::class)->name('blog.image');
+Route::post('users/delete/avatar', UserController::class)->name('user.delete.avatar');
 Route::get('blogs', [BlogController::class,  'getBlogs'])->name('blogs');
 Route::post('blogs/{id}/view', [BlogController::class,  'addViews'])->name('blog.views');
 Route::get('blogs/advance-search', [BlogController::class, 'search'])->name('blog.search');
