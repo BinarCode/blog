@@ -38,6 +38,7 @@ class BlogRepository extends Repository
             Image::make('image'),
             field('slug')->readonly(),
             field('views')->readonly(),
+            field('created_at')->readonly(),
         ];
     }
 }
